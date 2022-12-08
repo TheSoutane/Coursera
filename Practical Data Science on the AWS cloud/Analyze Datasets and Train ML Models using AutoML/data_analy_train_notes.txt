@@ -1,0 +1,36 @@
+These are SuperSoutane's notes for the Coursera course: Analyze Datasets and Train ML Models using AutoML
+
+Week 1 Videos:
+	AWS data management infrastructure
+		Data lakes:
+			Centralized Repo
+			Governance
+			Based on Object storage
+		
+		AWS Storage and query tools:
+			Amazon S3: Block storage
+				cool for growing amount of data
+				structured data
+			AWS Data wrangler:
+				Python lybrary to connect pandas DF to AWS data services
+				ex: load S3 data
+			AWS Glue Data catalog
+				Creates references and data mapping
+				Where to find and how to access data
+				sub element:
+					Crawler
+			Amazon Athena:
+				presto based
+				Query data in S3
+				SQl based
+				Schema lookup in AWS Glue
+					Glue(athena)
+				Useful on large datasets
+					Automated parallelization and ressource allocation
+
+	AWS Data Visualisation tools:
+		Classical Python libs combined w SQL Query
+		
+Week 1 Coding:
+
+		
