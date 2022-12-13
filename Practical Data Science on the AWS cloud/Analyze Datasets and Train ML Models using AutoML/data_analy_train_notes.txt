@@ -130,3 +130,47 @@ Week 3 Courses:
 			Scaling Options
 		AutoML deploys natively
 		
+Week 4 courses
+	Built in algorithms 
+		expects data in a certain format
+	
+	other options
+		Bring your own script			
+		Bring your own container
+	
+	Text analysis ML methods
+		Word2vec
+			text to latent space
+			vector used as input to ML algorithm
+			Continuous Bag of words
+				Predict missing word
+			Continuous skip bag
+				Predict surrounding windows from word
+		GloVe:
+			Unsupervised learning
+		FastText:
+			Built on word2vec
+			break words into n-grams
+				-> Allows to integrate unknown words
+		Attention/transformers
+			Self attention mechanism
+				Model component captiures link betweenin and outputs
+				Here: capture link between all elements in the input sequence
+		BlazingText
+			Accelerates Word2vec (GPU)
+			Accelerate FastText (CUDA)
+			Creates n-grams
+		ELMo: Embedding of Lang models
+			Forward and backward model combination
+		GPT: Generative pre-Training
+			Based on 2 set of data
+				1/ unlabeled text
+				2/ labelled text
+		Bert:
+			Similar training as GPT but bi-directional
+			Left to right or right to left focus
+			Lots of variations
+	implementation: Blazing text
+		Like any other data
+		
+			
