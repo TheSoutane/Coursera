@@ -32,5 +32,101 @@ Week 1 Videos:
 		Classical Python libs combined w SQL Query
 		
 Week 1 Coding:
+	Useful code snippets on how to interract with S3 buckets directly of with AWS Athena/Glue
 
+Week 2 Videos:
+	Data quality
+		
+		Statistical bias
+			Imbalance of the training datasets (ex spams VS not spam)
+			Business and Legal implications
+			Causes:
+				Activity bias
+				Societal bias
+				Selection Bias (ex social bubble, for systems with a feedback loop)
+				Data Drift (modification of the data that shift away from the original data)
+					Covariant drift (distribution drift)
+					Prior proba drift (environment drift)
+					Concept drift (ex soft drinks can be soda or lightly alcoolic drink)
+			Measures:
+				Facet: feature of interest used to measure bias
+
+				Class imbalance
+				Difference in proportion of Label
+					ex product category within a specific category
+			Detecting stat Bias
+				
+			
+			AWS detection tools: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html
+				Sagemaker data wrangler
+					Connect diff sources
+					Visualize data
+					Detect stat bias
+					Generate reports
+					option: features importance
+				Sagemaker Clarify 
+					Bias detection: provides custom function to define tasks and link it to ressources for execution
+						Based on the clarify library
+						Link instance to computing ressources
+						Input/output data
+						BiasConfig object
+					report generation
+					Drift detection
+				selection:
+					Data wrangler: Multi sources and UI, Uses a subset of data
+					Clarify: API structure, works on all data, can be deployed on cluster (Large scale)
+
+			Feature importance: https://shap.readthedocs.io/en/latest/
+				Calculation based on the SHAPLEY value
+					Based on game theory
+						Each feature is a player
+						outcome is the model
+						Use of Game theory to compute contribution of each feature to the model
+					Can be time consuming
+					
+
+Week 3 Courses:
+
+	AutoML pros
+		Time to market reduced
+		Less ML skills required
+		Optimize ressources and time
+		
+		
+	AutoML workflow
+		Automate the classical steps of ML algorithm
+			Problem definition: Here we have only 3 outputs -> Classification
+			Alg selection: Identify avail data/transform it/train_test_split/train/eval
+			
+	AutoML Capabilities
+		Sagemaker Autopilot: https://aws.amazon.com/sagemaker/autopilot/
+			Automated problem identification
+			Feature Engineering: Complete autopilot, manual or assisted
+		Features:
+			Target
+			training time
+			N candidates
+				Time per candidate
+			Input data
+			
+		output
+			Multiple candidates
+			Code used to generate candidates 
+			Code running pipelines (including hosts etc...)
+			
+			
+	TFIDF text processing
+		Quantify term frequency for each topic
+			Maps relevance of term to topic
+		
+		Workflow
+			TF: Term Frequency frequency across documents
+			IDF: Inverse document Frequency. Scale down importance of high frequency terms
+		
+	AutoML Deployment
+		Hosting Stack
+			Type
+			Count
+			Scaling Options
+		AutoML deploys natively
 		
