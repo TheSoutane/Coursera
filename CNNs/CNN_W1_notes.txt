@@ -1,0 +1,129 @@
+Week 1 course
+	Computer vision
+		types of alg
+			Image classification
+			Object detection
+			Style transfer
+		Complexities
+			image size
+			justify the CNN structure
+	Edge detection	
+		Identify diff elements of the picture (ex: edges)
+		How:
+			- Built dedicated filter(s) or kernel
+			- Do elements wise multiplication for convolution
+			- The result will be high values for corresponding geometries (ex: vertical or horizontal edges)
+		It creates positive and negative edges
+			It depends of whic area is lighter or darker
+		Traditionally, filters aer set manually
+		Nowadays treated as learning parameters
+	Padding
+		def: addition of artificial empty pixels on the side of the picture
+		rationale: some features are much less filtered than other (ex: edge pixel vs central pixel)
+	Valid and same convolution
+		Valid: no padding
+		Same: Pad so that the output has the same size as the input
+	Strided convolution	
+		"bigger" convolution steps
+		Stops when kernel goes "out" of the picture
+	Convolution over volume
+		Ex: RGB image (6*6*3)
+			3*3 filter -> 3*3*3 (stack of matrices)
+	CNN Layer
+		3D convolution + bias -> wrap it in an activation function and you hae your layer
+		apply multiple filters
+		example:
+			3D image () with 10 3*3*3 filters
+				- 28 params per filter (3*3*3+1)
+				- 280 in total
+			other caracteristics
+				filter size
+				padding
+				stride
+	Simple convolutional network example
+		input: 
+			39*39*3 picture
+		first layer:	
+			3 by 3 filters
+			Stride of 1
+			No padding
+			10 filters
+			
+			output
+				37*37*10
+					37 <- (n+2p-f)/s+1
+						n: image size
+						p: padding
+						f: filter size
+						s: stride
+					37 <- (39+0-3)/1+1
+					10 <- number of filters
+		2nd Layer
+			stride of 2
+			filter size 5
+			no padding
+			
+			output:
+				size <- (37+2*0-5)/2+1 = 17
+				17*17*20
+				
+		3rd layer
+			filt: 5
+			Stride:2
+			40 filters
+			
+			output
+				size <- (17+0-5)/2+1 = 7
+				7*7*40
+		Flattening in 1 vector of size 1960
+		Last layer of softmax to get y
+		
+		Types of layer
+			Conv
+			Pool
+			Fully connected
+	
+	Pooling layers	
+		Reduce size of data
+		Take the max of a defined area (can be mean or other)
+		Make feature detectors more invariant to its position in the input. 
+		Hyperparameters
+			Filter size
+			Stride
+		Size is defined by same formula as conv layers
+		
+	CNN example
+		32*32*3
+		
+		L1: conv
+			f = 5
+			s = 1	
+			out: 28*28*6
+		L2: pool
+			f=2
+			s=2
+			14*14*6
+		L3: conv
+			f=5
+			s = 1
+			out 10*10*16
+		L4: pool
+			f=2
+			s=2
+			out = 5*5*16
+		flattening into one 400 dim vector
+		L5: FC
+			120*400 matrix
+		L6: FC
+			84*120 matrix
+		L7: softmax
+		
+		Remark: Usually, the conv and pulling layers are considered as a unique layer
+	
+	Why convolutions
+		The use of filters reduce complexity
+			Sharing of parameters across different positions in the image
+			Sparsity of connections reduce complexity
+			
+			
+		
