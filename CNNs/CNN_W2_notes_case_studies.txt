@@ -1,0 +1,104 @@
+Week 2 
+	Classic networks
+		LeNet-5
+			worked on 32*32*1 digits
+			4 conv, 2 FC layers + softmax
+			60k parameters
+							
+		AlexNet
+			227*227*3
+			1 conv, 3 'same' conv, 3 FC + softmax
+			Killed the computer vision game
+		VGG-16
+			All identical layers: 
+			conv with 3*3 filters and stride of 1
+			maxpool 2*2 and stride of 2
+			16 layers
+		Resnet
+			Built on residual blocks
+				Use of "shortcut"
+					add a[l] to z[l+2] just before the application of non-linearities
+						no inter connection between blocks
+					Kinda jump over 1.5 layres
+				Allows to train much deeper networks
+					solves vanishing and exploding gradient
+			Why does it work
+				Identity function is easy (have W=0 and b=0 for the 2nd part of the block)
+				If too complex, the network goes to identity (not the case of classical layer)
+				For convolutions, it is important for the model to conserve dimentions withing the block
+		1*1 convolutions
+			1*1 filter
+				Looks across all the channels and aggregate
+			Useful to reduce number of channels and reduce complexity
+		Inception Network
+			Motivation
+				ex: 28*28*192 volume
+					run in parallel:
+						1*1 convolutions
+						3*3 Same convolutions
+						5*5 same convolutions
+						Max-pool w same padding
+					All outputs a 28*28*x volume
+					Stack all 4 outputs into one unique volume
+				Problem: computational costs
+					for 32 5*5 filters:
+						fucking complex: 28*28*192 * 5*5*32 = 120millions params
+				Solution:
+					1*1 conv to go for 192 to 16 channels
+						Can be called a "bottelneck" layer
+					resulting complexity for 32 5*5 filters
+						16 1*1 conv: 28*28*192 = 2.4m
+						32 5*5 conv: 28*28*32 * 5*5*16 = 10m
+						total: 12.4 millions (10 times less)
+			inception layer
+				same example as in motivation
+					in parallel: 
+						1*1 conv + 3*3 conv
+						1*1 conv + 5*5 conv
+						1*1 conv
+						maxPooling + 1*1 conv (to go from 128 to less channels)	
+					Followed by concatenation channel
+		Mobilenet
+			Conceptual intro
+				Low compute environment
+				Core idea: Depth wise separate convolutions
+				
+				number of parameters: f*f*n_C*n_f
+				
+				Depth wise convolutions
+					Use one 2d filter per channel in convolution instead of one 3D for all
+					Reduces number of calculations
+				Pointwise convolution
+					1*1*n_c filter
+					repeat accross filters
+				The combination of both approaches can be seen as a normal convolution w more sparsity
+				Can be considered as a way to simplify algorithm through sparsity
+			Architecture
+				Combineation of point and depth wise layers
+				A V2 was developped:
+					Residual connection (as for resnet)
+					Expansion Layer
+						use of 1*1 filters to expand the number of channels
+						Increase size of intermediary layer
+							Increase filter complexity
+							Immediately reduce size with anothe pointwise conv after
+		Efficient Net
+			Baseline network with resolution r, depth d and layers of width was
+			Wich compenent is the most interessant to inc/reduce
+				Look on Efficient Net doc
+			
+	Using open source implementation
+		Easy to wodnload on github
+		Transfer learning
+			Use of pre trained networks
+				freez weights and re train last layer
+		Data augmentation
+			mirorring
+			cropping
+			color shift
+			PCA color augmentation (advanced)
+		State of computer vision
+			ensemn$ble models on benchmarks (1-2% better)
+			Multi crop: 
+				~ apply data aumentation to test data
+			   
