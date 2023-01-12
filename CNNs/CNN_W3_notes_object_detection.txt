@@ -1,0 +1,99 @@
+Week 3: Detection algorithm
+	
+	Classification VS Object localization
+		Classification: I object
+		Object localization: more than 1 + bounding boxes
+			output bounding boxes for the detected object
+				4 data: midpoint (x and y), height and width
+			target labels:
+				pc: is there any object
+					if pc == O, alg don't care about the other values
+				bounding boxes
+				Class classification normal output
+			Loss
+				if  y1 (pc) = 1:= difference of other values with true vals
+				if  y1 (pc) = 0:= (y1-^y1)^2
+	Landmark detection	
+		landmark: X, Y of important points
+			ex face elements, shoulder, elbow,... in a body
+		Landmarks must be consistent across training set
+		Building block of object detection
+	Object detection (sliding window alg)
+		descr:
+			select window size and slide it across every window and crop
+			do it with multiple window sizes
+			Check if there is a car in in
+		Issue: Explodes computation time
+		solution: dedicated convolutional implementation
+	Convolutional implementation of sliding window
+		Idea: 
+			If image cropping overlaps, some computation might be repeated
+				Use of a fully conv structure and replace cropping by striding over the image (smart padding required)
+			Turning the FC + softmax layers into convolutional equivalents
+
+	
+		Replace 2 FC (400 neurons) + softmax by filters of block size
+			ex: 5*5*14 conv output to be turned into 4 classes
+				-> use of 400 5*5 filters instead of 1st FC
+				-> 400 1*1 filters for the 2nd fc
+				finally 4 1*1 filters
+		
+		-> much more efficient from a computational perspective !
+			one limitation: Bounding box will be quite innacurate
+				Solution in next paragraph !
+	Bounding box prediction
+		YOLO algorithm
+			predict each bounding box value for each grid cell of the convolutional implementation
+			output as conv block
+		limitations: more than 1 object per grid cell
+		Encoding of the bounding boxes
+			Use of a [0,1] scale for each sub cell
+				Compution of the box values relative to the grid cell
+				height and width can be greater than 1
+		Intersection over union
+			Computes interrsection and union between output box and real box
+			metric will be intersection/union (IoU)
+				IoU >0.5 is considered as correct
+		Non-max suppression
+			Issue multiple detection of the same object
+			Keep only the most confident box (therefore the name)
+		Anchor boxes	
+			Multiple objects per grid case
+			stack I vector per anchor box
+				kind of force shape through the boxes
+				Object will be assigned to a grid cell:anchor box pair
+			How to choose them
+				traditionally: by hand
+				modern: kmeans of objects to be detected
+	YOLO algorithm overview
+		Synthesis of previous points
+	Region proposal (R-CNN
+		Use of a segmentation algorithm and run detection on specific regions
+		Quite slow
+			improvements:
+				Fast R-CNN: Use of conv implementation of sliding window
+				Faster R-CNN: Region proposal through Convolutions
+	Semantic segmentation with U-Nets
+		Semantic segmentation: label every pixel
+		Convolution that gets back to a full size image (segmented)
+			performed using transpose convolutional
+	Transpose convolution 
+		Goes from small img size to bigger
+			defined by filter, padding and stride
+				"ignore" the padding area
+				when boxes overlap: add values
+	Unet architecture
+		Normal convolutions
+			Reduce dimension
+		Transpose convolution	
+			Bring back to original size
+		Skip connections
+			Combine spatial info (from 1st layers) with fine grained filters (from later layers)
+		Finish with a 1*1*1 convolution to get the final image
+		
+				
+		
+		
+		
+		
+		
