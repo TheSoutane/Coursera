@@ -1,0 +1,87 @@
+## Notes of the Sequence models course provided by DeepLearning.ai ##
+
+Week 1: RNNs
+	Why Sequence models
+		Seq defined problems (sound, text, DNA)
+	Notations
+		T_x(y): len of input (output)
+	NLP
+		Word representation:
+			Use of a "vocabulary"
+				Vector with all words (The most occuring ones over the corpus)
+				Replace words by the corresponding token (vector of vocab size with a 1 at the corresponding position in the vocab vector)
+				Nowadays 30-50k words
+				Dealing with unknown words -> Creatte "unknown token to fill gaps
+	The RNN Model
+		Standard model: feed forward (Unidirectional)
+			Defined input/output size (limited capacity)
+			If input of k one hot encoded words -> enormous input/output required
+		Solution: The RNN	
+			Word level input
+			Intermediate layer of word N is used as input for word N+1
+				2 step computation: 1/ compute intermediary layer 2/compute output vector
+				Simplified representation by stacking a_t-1 and X_t together
+			Limitation: left to right architecture, does not consider the n+k inputs (ok for time series but not for text)
+	Backprop in RNN	 
+		Forward prop
+			input: X_1, ...X_t
+			intermediary stare: a_...
+			Step output: y_...
+			params used at each time step
+		Backprop	
+			1/ need to define loss (ex cross entropy)
+				defined ofe a sequence (sum of loss at every step): L = sum(L_i)
+			2/ Propagate error
+				Most significant error: intermediary vector
+	Different types of RNNs			
+		In previous ex the input size is the same as the output
+		Most of the time it doesn't match (ex sentiment analysis, generation, ...)
+		Use case: sentiment classification (/5)
+			different architecture: Many to one
+				ignore timestep output except for the last one
+		Use case: Musig Generation: One to many
+			Input note and generate next element at each step
+			output being the input of the next step
+		Use case translation: Many to many
+			no output for input sentence, only for output sentence
+		Synthesis of RNNs
+			One to one
+			One to many
+			Many to one
+			Many to many (equal or different)
+	Language model and input generation
+		Training set: larg set of text data
+			Tokenize text
+			Input (step by step) :
+				Specific beguinning token 
+				Word token step by step
+				Specific End of sentence token
+			Output:
+				At step k, conditional probability of having the "left" words in a text
+			Cost:
+				unclear, see exercises
+	Vanisghing gradient with RNNs
+		Backprop vanishes for long sentences
+			lack of understanding of long range dependencies
+			need to force the implementation of a memory
+	Gradient Reccurent Unit (GRU)
+		inputs: State of t-1, inptu at time t
+		outputs: intermediary state + output
+		intro of a new vatiable, the memory cell (C)
+			Update value according to the gate variable
+			This creates the ability to "remember" the beguinning of the sequence
+	Long short term memory (LSTM)
+		More general version of GRUs
+		More advanced update function
+			Use of forget and update gate	
+				output will be state t-1 * forget + state t * update
+	Bidirectional RNNs
+		Rationale
+		Forward recurring component a_t
+		Backward recurring component a_back_t
+		forward and backward are independently connected
+			2 independant network working in opposite directions
+	Deep RNNs
+		Instead of a linear approach the representation looks like a square
+		picks intermediary inputs from steps t-1,2,3,...	
+		
