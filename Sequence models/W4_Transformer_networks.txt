@@ -1,0 +1,37 @@
+## Notes of the Sequence models course provided by DeepLearning.ai ##
+
+Week 3: Transformer networks
+	Intuition
+		Limitations of sequential moodels
+			Increased complexity
+			No parallisation possible
+		Concept
+			Attention based representation combined with CNNs
+			key concepts
+				self attention
+				Multi headed attention
+				
+			Both allows multiple representation of the same input
+	Self attention
+		Compute attention based representation for each word
+			Embedding incomplete
+				Ex: afrique -> Geostrategic, economic, tourism,...
+			Compute	attention value for each word
+				Query, Key and value for each word
+					conceptual representation of the embedding
+					For word 3: compute sum(Q_3*k_iv_i) to get A_3
+						Normalize layer using softmax
+			Result: get to know which word are the most related with the query word in our ex (Africa, rank 3)		
+				Much richer representation
+	Multi head attention
+		concept: for loop over the self attention
+			A head is a self attention mechanism
+			Concatenade self attention outputs
+				Parallelisation possible
+	Transformer networks
+		Use of sentence start and end tokens
+		Encoder: computes representation
+		Decoder: defines next word based on previous input
+		Use of position embeddingn
+			encodes position ov words in a limited space
+			Added to the input (stacked
