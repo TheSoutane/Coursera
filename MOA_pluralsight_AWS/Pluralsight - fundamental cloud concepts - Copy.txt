@@ -1,0 +1,154 @@
+## Notes of the pluralsight WAS cloud practitionner course - Fundamental cloud concepts ##
+
+Structure
+Cloud - Introduction to cloud computing: SaaS, PaaS, and IaaS.
+Services - This includes the following services:
+	Computing and data processing (EC2, Lambda) to manage virtual machines and event-driven computation
+	File Storage (S3) to store and access objects efficiently
+	Networking (VPC, Route 53) to configure networks and routing
+	Database to store SQL (RDS) and NoSQL (DynamoDB, SimpleDB) data
+	Notification (SNS) services for portable devices like cell phones
+	Message (SQS) storage and transfer service for communication and process management
+	Others: Time Sync for accurate current time and CloudFormation to automate work, etc.
+Security - Shared Security Model, Compliance and Artifact, Web Application Firewall(WAF), Inspector, Trust Advisor, CloudTrail, Cloud Watch, Identity and Access Management (IAM) services
+Billing - The pricing and billing structure of different services as per usage, quota, and plans
+
+Fundamental cloud concepts
+	CC concepts
+		Data enters
+			Traditional data centers
+				Built on premises
+				Long building time
+				Lack of flexibility in terms of location
+				High CAPEX
+				Limited scalability
+				High capabilities required
+			Cloud computing
+				economies of scale
+				No CAPEX
+				Scalability
+					no need to guess capacity required
+				More agile to switch machines
+				No maintenance needed
+				Easy geographical deployment
+			key concepts
+				elasticity
+					Ability to change loads managed by infrastructure
+				reliability
+					Continuity of service
+				Agility
+					Cost of change, trying smtg new
+		Types of CC	models
+			in order of control:
+				IaaS ( infrastructure as a service)
+					Responsible of all except maintennace of chips
+				PaaS (Platform as a service)
+				SaaS (Software as a service)
+			deployment models
+				Public cloud	
+					All on provider's infrastructure
+				On Premise
+					in the name :)
+				Hybrid
+					mix of Public and on premises		
+	AWS globally
+		Regions
+			Specific geographic location
+			W cluster of data centers
+			
+		Availability zone
+			One or more data enters
+			Multiple per region
+			In the geographic area of the region
+			Redundant 
+				power, network and connectivity
+			Naming:
+				area-sub_area -> Regions
+				number -> availability zone
+				ex: us-east-2a	
+		Local Zone
+			forefronts of the AWS centers
+			High capacity connectin
+			Goal is to emit/collect data in an optimum way
+		wavelenght zones
+			Same for wireless
+		edge location 
+			Nodes of the content delivery network 
+	Economics 
+		Costs structure
+			CapEx VS Opex
+		Tools for cost organisation
+			Aws cost explorer
+				Breaks down by service/ cost tag
+				Provides predictions for the next 3 monts
+				Provides optimization reco
+				available via API
+			AWS budget
+				Track costs per entity using cost explorer data
+			Cost planning tools
+				Pricing calculator
+					estimates the costs of a defined infrastructure
+				Migration hub
+					Same for workload transition
+			Ressources tags
+				Metadata of a specific ressource
+					Name and optional value
+					Use case/dept or project
+				reports
+					costs grouped per active tage
+			AWS Organisation
+				manage multiple accounts under one master accounts
+				Consolidated billing per accounts	easier mgmt
+		moving to the cloud
+			Pre-define
+				Current workloads
+				Forecasted infrastructure needs
+				Cost analysis of both options
+			AWS Migration hub	
+				Sort of doc providing the possible tools
+			Migration evaluator
+				Calculate needs and help building business case
+			Pricing calculator
+				Quick or advanced estimates (diff levels of details)
+		Cost exploration
+			AWS cost explorer
+				breakdown of costs per service/type			 
+	Support tools and services
+		Basic Support tools	
+			AWS support
+				Tiers differences
+					Communication method
+					response time
+					Cost
+					Offered guidance
+				Different tiers
+					Basic support	
+						Trusted advisor
+					Developer support
+						Business hour mails
+						1 primary contact
+						29/month
+					Business support	
+						Full set of trusted advisor checks
+						Direct call possible 24/7
+						24/7 mail and chat access
+						Unlimited contacts
+						access to 3rd party software
+						from 100/month
+					Enterprise support	
+						Designated technical account manager
+						Concierge support team
+						from 15 000 per month
+			AWS personnal health
+				Dashboards w alerts
+			AWS Trusted advisor
+				Compare your usage against best practices
+				Accessible from AWS console
+				7 free core checks per customer
+					Cost, performance, Security, Fault tolerance, service limits
+		Further ressources
+			AWS Quickstart
+				cloud workloads
+			AWS partner metw consulting partnera
+			AWS prof services
+	

@@ -1,0 +1,105 @@
+To clarify
+	DImple Notification Servicess
+
+
+
+If an organization is looking for a managed NoSQL database on AWS, what solution would you recommend?
+	Dynamo DB
+	AWS RDS is a SQL service
+Making request from a program
+	AWS SDK
+What factors are included within the instance type for an EC2 instance?
+	Processor, memory, storage type
+	Region not included obviously
+Which storage class is the most cost effective if you need data to be available when requested, but you are not concerned with the durability of the data?
+	S3 One Zone infrequent access
+An organization leverages MySQL for multiple production applications. They want to be sure it can scale effectively in the cloud, but they don't want to remodel their data for another platform. Which approach would you recommend?
+	Amazon RDS with Aurora
+		Unparalleled high performance and availability at global scale with full MySQL and PostgreSQL compatibility
+Which serverless workflow service enables you to define complex workflows in Amazon States Language?
+	Step functions
+Which network file system allows you to connect multiple Linux EC2 instances?
+	Elastic File System (EFS)
+
+AWS LightSail
+	To quickly launch a wep page/application
+	Manages the underlying infrastructure
+AWS Cloud 9
+	IDE (cloud based)
+	Runs on EC2 instances for ex
+AWS Storage Gateway
+	Hybrid cloud specific
+	Cloud backed storage for on premises applications
+AWS Trusted advisor
+	Checks basedMore checks are available for Business and Entreprise support levels
+		Basic checks: Core security and service quotas
+		Advance checks: Cost optimization, security, Fault tolerance, performance, service quotas
+AWS Maria DB
+	Open source relational database
+	Available in AWS RDS
+AWS Aurora
+	High performance and high availability service (99.99%)
+	NoSQl and postgrsSQL compatible
+AWS S3 Glacier VS Infrequent access
+	Unclear
+Disaster Recovery approaches (in order):
+	Backup and Restore (hours)
+	Pilot Light (10s of minutes)
+	Warm stabndby (Minutes)
+	Multi site (No downtime)
+AWS Xray
+	Distributed tracking system
+	Collect and analyzes record traces to facilitate debugging and optimization
+AWS Kinesis
+	Streaming dataanalysis
+	For real-time workload management
+AWS Beanstalk
+	Web application deployment
+	Automates the provisioing/deployment of EC2 instances
+AWS EBS VS EFS
+	Block storages: Block is and must be attached to an instance, linked to a specific hard disk
+	EFS: Serverless storage option
+AWS Quick starts
+	Now partners solutions
+	Automated reference deployment
+AWS Shared responsability model
+AWS Redshift (is NoSQl ??)
+AWS Guarduty
+	Cost and usage reports
+AWS inspector: Automated vulnerability detection
+AWS Augmented AI:
+	Tool to perform human review of ML predictions
+AWS VPC flow logs: Collect VPC IP address even if they are flagged as private within the network
+	
+	
+CYBERVISTA
+Strategy for accidental deletion ?
+	Versioning (Backup works for disaster)
+Endpoint types
+	Gateway: Links communication between VPC and AWS, not necessary over internet
+	Interface type endpoint: Private connection to AWS services
+Instances running on EC2 are guest operating systems
+AWS S3 buckets:
+	cannot be duplicated 
+	can hold an infinite number of ojects of size <5TB each
+	Cannot have underscores or uppercase letters
+	Cannot change the name
+	
+	
+Savings plan: Commit to consistent use of "on demand" instances. Can save lot of money
+Encryption transparency:
+	Client side: Not transparent as AWS cannot know/garantee what is happening
+	Server side: Transparent
+NACLs
+	Virtual firewall that applies only to a subnet
+Web application firewall: From a network to a web app
+AWS Storage Gateway:
+	From private to public cloud, can be used to store data
+AWS cloudtrail: 
+	Interraction possible through an interface only
+AWS KMS (Keys management system):
+	Allows keys management (saving
+	Allows encryption
+	
+
+	

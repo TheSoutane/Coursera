@@ -1,0 +1,335 @@
+## Notes of the pluralsight WAS cloud practitionner course - Fundamental cloud concepts ##
+
+Structure
+Cloud - Introduction to cloud computing: SaaS, PaaS, and IaaS.
+Services - This includes the following services:
+	Computing and data processing (EC2, Lambda) to manage virtual machines and event-driven computation
+	File Storage (S3) to store and access objects efficiently
+	Networking (VPC, Route 53) to configure networks and routing
+	Database to store SQL (RDS) and NoSQL (DynamoDB, SimpleDB) data
+	Notification (SNS) services for portable devices like cell phones
+	Message (SQS) storage and transfer service for communication and process management
+	Others: Time Sync for accurate current time and CloudFormation to automate work, etc.
+Security - Shared Security Model, Compliance and Artifact, Web Application Firewall(WAF), Inspector, Trust Advisor, CloudTrail, Cloud Watch, Identity and Access Management (IAM) services
+Billing - The pricing and billing structure of different services as per usage, quota, and plans
+
+Core services
+	Interactions w AWS
+		 AWS Console
+			web and app based interface
+		 AWS CLI
+			works on windows, mac & linux
+			Specific CLI use of AWS cloudshell (browser based CLI)
+		 AWS SDK (software Dev Kit)
+			plug in into other languages
+			ex: python, Java, ...
+		 To use the cli and the sdk it is necessary to create and access key via the console
+			possibility to create keys with limited access
+	Compute services
+		AWS EC2 (IaaS)
+			Stands for Elastc Compute Cloud
+			Use cases
+				Web app hosting
+				Batch processing	
+				Endpoints
+				Remote desktop in the cloud
+			Core concepts	
+				Instance Types
+					Processor, memory and storage type
+						need downtime to be changed
+						Different instances optimize those aspects
+					Image defines the OS used on the instances
+					Base of pricing
+				Root device type
+					Storage services
+						Instance Store
+							Ephemeral storage attached to the hos image
+						Elastic book Store
+							Persistent storage existing separately from the host image
+				Amazon Machine Image ~ blueprint
+					Template for EC2
+					Many available
+					Can be shared across accounts
+					Custom ones can be created
+				Purchase options
+					Reserved instances
+						Standard
+							Fixed through payroll
+							Payable upfront, partial up or none
+						Convertible
+							Can adapt in a limited manner
+						Schedule  
+							Can adapt over schedule
+					Spot instances	
+						Leverages remaning EC2 capacity
+						Works on a bid system
+						Perfect for processes that can start and stop without a problem
+					Dedicated host	
+						Use a fixed defined instances
+						required by use case in general
+					On demand instances
+						Intermittent loads
+						More expensive
+		AWS Beanstalk (PaaS)
+			Automates the process of deploying and scaling on EC2 Instances
+			Specific set of technologies
+			Only pay for leveraged services
+			Handles provision, Load balance and scaling
+			Supports tons of applications
+			Why is it better than EC2 directly ?
+				Monitoring included
+				Deployment managed
+				Scaling automated
+				Allows EC2 customization
+				Use cases:
+					Deploy without knowing other services
+					Reduce maintenance needed
+					Few customization required
+					Integration of other services
+		AWS lambda
+			No need to provision infrastructure (serverless)
+			Charge based on execution time
+			Enables event driven workflows
+			Pros:
+				Automated scaling
+				Pricing based on usage
+				Fault tolerance integrated
+		Container service
+			Can be run on on one of the previous instances
+				AWS app runner
+					+ no prior knowledge of container infrastructure
+				AWS ECS
+					Full featured container orchestration services
+					+ native integratoin of AWS services
+				AWS EKS
+					Kubernetes cluste mgmt service
+					+ easier with Kubernetes
+				AWS Fargate !!!!
+					Serverless compute engine
+					+ easier container orchestration
+					
+	Content and Network delivery services
+		AWS Virtual Private Cloud (VPC)
+			Logically isolated section of the cloud	
+				Virtual network
+					IPv4 & IPv6 addresses
+					Subnets (private and public)
+						Can use Network address translation
+					Connect to other VPCs
+					Private connection to private AWS services	
+						Allow to not send data on the web
+		AWS Direct connection
+			Connection to AWS services from premises
+				Everything happends behind the Firewall
+		AWS Route 53
+			Domain Name Service (DNS)
+				Changes need to propagate (couple of hours)
+			Global
+			Highly available
+			Enables Global ressources routing
+				routes to another server if first one downtime
+		AWS Elastic load balancing
+			Distributes traffic accross multiple targets
+			Integrates with EC2/ECS/Lambda
+			Supports multiple geo areas
+			3 different types: Application, Network and classic Load balancers
+			Scaling type	
+				Vertical scaling: Go to larger instance type with more ressources
+				Horizontal scaling (scale "out"): add additional instances to handle demand
+		AWS CloudfFront
+			Content Delivery Network (CDN)
+				Based on the edge location network
+				Supports static and dynamic contents
+				Supports security features (Shield,...)
+		AWS API Gateway
+			Fully managed API mgmt services
+			Integrated within AWS
+			Monitoring and metrics
+		AWS Global accelerator
+			Use internal AWS Network VS public internet
+				Allows access to load balancing
+			Significant perf improvement
+				Minimize distance using edge location
+				More fault tolerant because not relying on DNS
+			Practical use case	
+				Non http protocol
+				Static IP
+				Instant failover
+				
+	File storage services
+		File storage
+			AWS S3
+				Store files as objects in buckets
+					bucket: space with settings (automatically applied to objects)
+					Data stored in multiple availability zones
+					URL access to files
+				Non-archival storage classic
+					Multiple Tiers
+						S3 Standard
+							Default setting, for frequently accessed data
+						S3 Standard intelligent tiering
+							Move data based on access
+							2 underlying classes
+								Frequent and infrequent
+								Induces cost saving
+						S3 Standard-IA (infrequent access)
+							Infrequent access w standard resilience
+						S3 one zone-IA (infrequent access)
+							Infrequent acces data stored in one unique Availability Zone (AZ)
+					S3 Lifecycle policies
+						Can define expiration/transition of objects
+						Move object to anothe storage class based on time
+						Delete objects based on age
+					S3 Transfer acceleration
+				Practical use case: Creating a website on S3
+					1/ Create bucket	
+						Select name and region, name need to be globally unique
+						ACLs enabled to manage settings of the object
+						Make accessible to public
+						Enable server encryption
+					2/ Upload files to the bucket
+						Adapt permissions if required
+							allow public access (read only)
+					3/ Enable Bucket static website hosting
+						Specify index file
+						Redirect rules if needed
+						Will create an endpoint
+					4/ Go to website
+			AWS S3 Glacier
+				designed for archive storage
+				3 Classes
+					Instant retrieval
+						Milliseconds -> User data
+					Flexible retrieval
+						minutes to hours -> Backup/ offsite storage
+					Deep Archive
+						Within 12h -> Compliance data 
+			Storage servers
+				AWS Elastic Block Store (EBS)
+					Redundancy within AZ
+					Allow data snapshot (Backup)
+					Offers encription
+					Offers multiple drives types	
+						SSD: General, code effective
+						IOPS SSD: High perf volumne, low latency
+						Throuput optimized HDD: Frequently accessed data
+						Cold HDD: low frequency access
+					
+				AWS Elastic file system (EFS)
+					Fully managed
+					Designed for Linux workloads
+					up to petabyte
+					Store data accross AZ
+					2 tiers: Standard an frequently
+					Windows option: Amason FSx for windows
+		Files transfer
+			AWS Snowball
+				Large scale data transfer (petabyte)
+				Physical device
+			AWS Snowmobile
+				Large case (exabyte)
+				Shipping container
+				Connection realized by AWS
+			
+	Database services and utilities
+		Amazon Relational Database service (RDS), PaaS
+			Fully managed service (no need to worry about backup, scaling, provisioning, ...)
+			Deployment accross AZ
+			Some platforms support read-replicas
+			Launches within a VPCWorks on SSD and IOPS SSD
+			Supports: MySQL, PostgresSQL,Oracle,..., AWS Aurora
+
+		Amazon Dynamo DB (SaaS)
+			Fully managed NoSQL database service
+			key value and document database
+			Low latency at virtually every scale
+			Supports automated scaling based on configuration/usage
+			DAX: memory cache alongside Database to speed up use
+			Use cases	
+				Scale without maintenance
+				Serverless architecture
+				low latency
+				Data without blob storage
+		Amazon redshift (SaaS)
+			Scalable Datawarehouse services
+			Supports petabyte scale
+			High perf disks
+			isolation within VPC
+		Amazon Resdshif spectrum
+			Redshift for exabytes
+		Amazon Elasticache (SaaS)
+			Fully managed in memory data storelow latency, allows scaling
+			Can used for DB layer catching and session storage
+		AWS Database Migration service
+			Allows to move data
+			One time or continuous migration
+		Other services
+			Document DB (MongoDB compatible)
+				Mongo DB workloads
+			Neptune: Graph database
+				Mapping interactions between points (ex social ney=twork)
+			Memory DB: Redis compatible
+				Fast in memory primary DB
+			Timestream: in the name
+	
+	App integration services
+		Messqging service 
+				AWS Simple Notification Service (SNS)
+					Organize info into TOPICS
+					Fully managed
+					Integrates within AWS services
+					Works accross sms, mail, ...
+				AWS Simple Queue Service (SQS)
+					Decoupled and fault tolerant
+					up to 256kB of datakeep msg up to 14 days
+					2 types of queues
+						Standard
+						FIFO
+		AWS Step function
+			Fully managed service to orchestrate workflows
+			Supports error handling
+			Price per transition
+			Defined using Amazon stats Language
+			Integrations
+				Compute services
+				DB services
+				Messageing services
+				ML services
+	
+	Governnance and services
+		AWS CloudTrail
+			monitor account activity accross the AWS infrastructure
+			Logs all actions, in the region where the occurs
+			Meets compliance requirements
+		AWS CloudFormation
+			Provisioning infrastructure service 
+				Can be done using templates (YAML, JSON)
+				Handle dependencies between ressources
+			No additional charge
+			Provides drift detection
+		AWS CloudWatch
+			Metrics, logs and alarms
+			Alarms are based on metrics
+			Allows custom dashboards
+		AWS Config
+			Evaluates infrastructure again pre-defined rules
+			Includes compliance pass
+			Works cross region/AZ
+		AWS System Manager
+			Operational data and automation accross infrastructure
+			Unified user interface
+			Automation of common maintenance tasks
+		AWS OpsWorks
+			Config Mgmt service	
+			Config defined as code for servers
+			Provides lifecycle mgmt
+			Works within hybrid cloud architecture
+			Config:
+				Chef automate
+				Puppet Enterprise
+				Stack
+		AWS Control tower
+			Centralizes users accross accounts
+			Allows account creation based on templates
+			Includes guardrails
+			Operational dashboards
