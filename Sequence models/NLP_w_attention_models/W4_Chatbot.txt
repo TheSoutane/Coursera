@@ -1,0 +1,24 @@
+
+
+Working with long sequences
+Transformrs issues
+	Attention on size L seq takes L^2 of memory
+		Focus on area of interest
+LSH Attention	
+	LSH: Locality sensitive Hashing
+	Can be used to speed attention
+		original method: softmax(QK^T)V
+	Process:
+		Hash Q and K
+		Standard attention within same hash bins
+		Repeat to increase probability of keys in the same bins
+	Main interest:
+		Highly parallelizable if we chunk the lsh buckets
+Reversible layers
+	Reversible residual layers
+	Store to layers to update them in parallel
+		input is heavier but no cache is needed
+	Slight outperformance
+	
+		
+	

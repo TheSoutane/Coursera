@@ -1,0 +1,132 @@
+NLP with attention models week 2
+
+Main point: Transformers networks
+
+Transformers VS RNNs
+	RNNs limitations
+		Sequential steps used to encode input 
+			No parallelization possible
+			Loss of information
+			Vanishing gradient
+	Comparison w transformers
+		Relies only on attention
+			No parallelization problem
+	Transformers overview
+		Use of Scaled dot product attention	
+		Can be run in parallel to create Multi head attention
+		Encoder
+			Performs self attention on the input sequence
+				Attention of each word of the input on the other words of the input
+			Returns contextual representation of each one of the inputs
+			repeated
+		Decoder
+			1st attention module
+				Mask is applied so that every input of the decoder sees only the previous steps
+			2nd attention module
+				takes the encoder input into account
+				Decoder can see all items
+			repeated 
+		Positionnal encoding
+			Learned or fixed
+			Values are stacked to the embedding
+		Overall
+			Parallelizable
+			no Vanishing gradients
+			output probabilities of each word in vocabulary
+
+Transformers application
+	Popular application
+		Text summary
+		Auto completion
+		Named entity recognition
+	Modern transf architecture
+		GPT2: Generative Pre-training for Transformers
+			Text generation
+		BERT: Bidirectional Encoder Representation for Transformers
+			Text representation
+		T5: Text To Text Transfer transformer
+	Intro to T5
+		"Multi task" transformer
+		takes text and instruction as input and execute the instruction for the text
+
+Scaled and dot-product attention
+	Review
+		Key elements: Query-Key-Values
+		Relies on 2 Matmul + softmax
+		Example:
+			Je suis heureux -> N=3 embeddings of size L
+			Query matrix: matrix with embeddings as rows (Q est de dim NxL)
+			
+			I am happy -> N'=3 embeddings of size L
+			Key matrix: matrix with embeddings as rows (K est de dim N'xL)
+			V is usually identical to K (at least the same dimension)
+	Maths behing
+		A = softmax(Q*K^T /sqrt(N') * V
+			QxK^T: NxL * LxN' -> NxN' matrix
+			/sqrt(N'): Put there for performance reasons, no informational meaning
+			* V: NxN' * N'*L -> One context vector for each query
+
+Masked self attention		
+	Ways of attention
+		Encoder-decoder
+			Queries come from one sentences and the key/values from another
+			Ex translation
+		Self attention
+			Q/K/V come from the same sentence
+			Representation of word meanind within the sentence
+		Masked self attention
+			Same as self, but a word computes attention only with the words preceding it
+	Masked self attention
+		Mathematically the same as the scaled dot product
+		Difference: a mask is added to the softmax input
+			in our case, upper diagonal values are discarded
+
+Multi headed attention
+	Intuition
+		Apply attention in parallel
+			each head would use a different representation
+		Aallows to infer more complex connections
+		Head are treated in parallel	
+			Apply linear transformation to the matrix and then compute dot scaled product
+		Concatenate outputs and apply a linear layer
+	Illustrative application to multiple heads:
+		Consider the Q/K/V matrices as define above
+		for head i :
+			Q' = Q*W_i^Q -> W_i^Q of dim Lxd_k
+			K' = K*W_i^K -> W_i^K of dim Lxd_k
+			V' = V*W_i^V -> W_i^V of dim Lxd_v
+			Usually, d_k = d_v = d_model/h
+				d_model: embedding size
+				h: number of heads
+				Allows to have a computatio cost similar to a simple head
+			returns a N'*d_v matrix
+		Stack output matrix horizontally
+			get a N' x (h*d_v) matrix
+		Matmul to get the d_model shape if required
+		
+Transformer Decoder
+	Also called GPT2
+	Structure block overview
+		In put: sentence or paragraph
+			Tokenized
+			Positionnal encoding addeds
+			Mask so it looks only to previous words
+		Nulti head attention looks to the previous steps
+		Feed forward layer operating on each head
+			That's where the parameters are
+		Residual connection with layer normalization
+	Block is repeated N times
+	Linear + softmax for the output
+	Implementation guidelnes
+
+Transformer summarizer
+	Struct overview
+		
+	Tech details (data proc)
+		Input: long article / summary
+		Tokenize -> add start/end tokens + padding
+		Loss:
+			Word level Cross entropy loss
+			Ignore the prompt anc dompute only for the summary
+	Application
+		

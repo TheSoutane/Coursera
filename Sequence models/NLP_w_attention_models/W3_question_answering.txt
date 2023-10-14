@@ -1,0 +1,98 @@
+Question answering
+
+Focusing on the Bert/T5 model based on Hugging faces
+
+
+Question answering
+	2 maine approaches
+		Context based
+			extract answer from a context
+		Closed book
+			Comes out with its own answer
+ 	
+Transfer learning
+...
+
+Bert
+	Bidirectional:
+		Normally, to predict words, models are looking at the previous words
+		With Bert, the model is looking at the whole sentence
+Single VS multi task
+	Capacity of the 
+	
+History of LLMs
+	CBOW (Continuous Bag oOf Words
+		Use of a fixed window looking at the words before and after
+		Use fulley connected network to predict the words
+		Limited context is considered
+	ELMo (Full Context Usnig Rnns)
+		Use of all context words
+		Application of 2 RNNs to create embedding
+		Limited memory size
+	GPT
+		Use of decoder to generate text
+		You cannot look forward
+	Bert
+		Look at both sides to predict words
+		Pre-training: 
+			Missing word prediction (Masked language modelling)
+			Next sentence prediction
+		Is encoder based
+	T5
+		Combines encoder and decoder
+BERT Deep dive
+	Bidirectional encoder Representation for Transformers
+	Makes use of pre-training and transfer learning
+	Structure: Encoding/transformers/Decoding
+	Training: Pre-training (self supervised) and fine tuning (supervised)
+	Bert_base
+		12 Layers
+		12 attention heads
+		110 millions parameters
+	Pre-training: Masked Language modelling (predict missing word)
+		See paper for training details
+	Bert Objective (embedding and error calculation)
+		Multiple embeddings
+			Positional embedding
+			Segment embedding
+			Token embedding
+		Error calculation:
+			MLM: Cross entropy loss
+			NSP: Binary loss
+	Bert fine tuning
+		Input: 2 sentences, question - Answer // text synthesis
+			Used for training
+T5 Deep dive
+	Transformer that can be usedfor multiple tasks
+	Architecture
+		Encoder-decoder12 transformers blocks each
+		220 millions parameters
+	Multi task training
+		Use of a training task tag
+			ex: Summariz, cola sentence
+		In-out format:
+			Format is specific to each task
+		Data quantity
+			Equal proportion for each task
+		Gradual unfreezing
+			Fine tune the layers gradually
+		Adapter layers
+			???
+		Fine Tuning
+The GLUE Benchmark
+	General Language Understanding Evaluation
+		Contains multiple datasets with different difficulties
+		Has a leaderboard for comparison
+		Can be used for many different tasks
+Question  Answering
+	Combine transformer with decoder
+	Process:
+		Load model
+		Process data to get the input-answer required
+		Fine tune model
+		Predict using own model
+		
+		
+	
+		
+	
