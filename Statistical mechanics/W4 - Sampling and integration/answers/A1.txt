@@ -1,0 +1,21 @@
+Explanation using mathematical definition
+ why the segment [-1, 1] represents a one-dimensional sphere
+[-1, 1] is the ensemble of points with a distance lower than one to the origin. It is equivalent to the 1d sphere
+
+ why  the square from -1 to 1 in x and from -1 to 1 in y is a unit cylinder in  two dimensions
+Definition of a unit cylinder in dim d: sphere in dim d-1 and all points within [-1, 1]  in the last dimension. Here the points on the x axis in [-1, 1] are part of a sphere (cf previous point) and y is withing [-1, 1], matching the unit cylinder definition
+Remark: x and y are interchangeable in the demo
+
+
+
+ Confirm and explain that the unit cylinder in two dimensions has twice the volume of the unit sphere in one dimension
+Definition of volume (specific to convex shapes): Span across the different dimensions. Let's assume that the unit sphere in 1d has a volume V, the final volume will be V_final = V * Span([-1, 1]) = 2*V. (Span([-1, 1]) = 2 as defined in the doc table)
+
+Explain (prove) why the above relations
+V_cyl(2) = 2 V_sph(1): Please refer to the previous bullet point
+V_cyl(3) = 2 V_sph(2): Applying the same reasoning as before, replace V with V_sph(2) and we get this result
+ V_cyl(d + 1) = 2 V_sh(d) : Applying the same reasoning as before, replace V with V_sph(d) and we get this result
+
+Prove that Q(d) equals the ratio of the sphere volume in dimension (d) and the sphere volume in dimension (d-1), that is, prove that Q(d) = V_sph(d) / V_sph(d-1)
+ V_cyl(d + 1) = 2 V_sh(d) is equivalent to  V_cyl(d) = 2 V_sh(d-1). If we replace V_cyl(d) with 2 V_sh(d-1) in the equation, we get to the result
+
